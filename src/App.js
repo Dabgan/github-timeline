@@ -1,10 +1,13 @@
 import React from "react";
+import Theme from "./styles/Theme";
+import GlobalStyle from "./styles/global.styles";
 
 function App() {
     return (
-        <div>
+        <Theme>
+            <GlobalStyle />
             <h1>Github timeline</h1>
-        </div>
+        </Theme>
     );
 }
 
