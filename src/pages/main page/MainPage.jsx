@@ -8,7 +8,7 @@ const MainContainer = styled.div`
     flex-flow: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 10vh;
 `;
 
 const MainPage = () => {
