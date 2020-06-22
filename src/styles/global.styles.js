@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
 }
 body {
-    font-size: 3rem;
+    font-size: 1.5rem;
     background: ${(props) => props.theme.colors.persianGreen}
  }
     

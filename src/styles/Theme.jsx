@@ -49,6 +49,17 @@ const theme = {
     device,
     font,
     colors,
+    padding: {
+        s: "1rem",
+        m: "2rem",
+        l: "3rem",
+    },
+    margin: {
+        xs: "1rem",
+        s: "3rem",
+        m: "5rem",
+        l: "6rem",
+    },
 };
 
 const Theme = ({ children }) => (
