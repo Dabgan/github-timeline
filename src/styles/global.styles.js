@@ -1,10 +1,21 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
-    body {
-        font-size: 3rem;
-        background: ${(props) => props.theme.colors.persianGreen}
-    }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+body {
+    font-size: 3rem;
+    background: ${(props) => props.theme.colors.persianGreen}
+ }
+    
 `;
 
 export default GlobalStyle;
