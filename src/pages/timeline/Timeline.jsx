@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import TimeItem from "../time item/TimeItem";
+import TimeItem from "./time item/TimeItem";
 import styled from "styled-components";
 
 const TimelineList = styled.ul`
