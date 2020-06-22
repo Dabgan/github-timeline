@@ -1,11 +1,14 @@
 import React from "react";
 import * as styled from "./timeitem.styles";
 
-const TimeItem = () => {
+const TimeItem = ({ date, children }) => {
+    console.log(children);
+
     return (
         <styled.ItemContainer>
             <styled.Item>
-                <styled.Time>1934</styled.Time>lol
+                <styled.Time>{date}</styled.Time>
+                {children}
             </styled.Item>
         </styled.ItemContainer>
     );

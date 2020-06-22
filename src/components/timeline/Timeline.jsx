@@ -16,7 +16,9 @@ const Timeline = () => {
     return (
         <TimelineList>
             {commits.map((commit) => (
-                <TimeItem key={commit}>{commit}</TimeItem>
+                <TimeItem date={commit.date} key={commit.date}>
+                    {commit.message}
+                </TimeItem>
             ))}
         </TimelineList>
     );
