@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import TimeItem from "../time item/TimeItem";
 import styled from "styled-components";
 
@@ -8,12 +9,15 @@ const TimelineList = styled.ul`
 `;
 
 const Timeline = () => {
+    const commits = useSelector((state) => state.commits.commits);
+
+    console.log(commits);
+
     return (
         <TimelineList>
-            <TimeItem />
-            <TimeItem />
-            <TimeItem />
-            <TimeItem />
+            {commits.map((commit) => (
+                <TimeItem key={commit}>{commit}</TimeItem>
+            ))}
         </TimelineList>
     );
 };
