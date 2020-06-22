@@ -41,6 +41,7 @@ export const Item = styled.div`
     bottom: 0;
     width: 400px;
     padding: 15px;
+    font-size: ${(props) => props.theme.font.size.body.s};
     background: #f45b69;
     ::before {
         content: "";

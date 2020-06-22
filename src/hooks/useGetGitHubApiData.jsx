@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 // import parse from "parse-link-header";
 import { updateCommits } from "../redux";
+import formatDate from "./formatDate";
 
 const useGetGitHubApiData = () => {
     const dispatch = useDispatch();
@@ -16,11 +17,16 @@ const useGetGitHubApiData = () => {
         axios(config)
             .then((res) => {
                 let resCommits = [];
+                // let resCommitsDates = [];
+                console.log(res.data);
                 // get and logout every commit on page
                 // const links = parse(res.headers.link);
                 for (let i = 0; i < res.data.length; i++) {
-                    // console.log(res.data[i].commit.message);
-                    resCommits.push(res.data[i].commit.message);
+                    const date = new Date(res.data[i].commit.committer.date);
+                    resCommits.push({
+                        message: res.data[i].commit.message,
+                        date: formatDate(date),
+                    });
                 }
                 // console.log(resCommits);
                 dispatch(updateCommits(resCommits));
@@ -37,8 +43,6 @@ const useGetGitHubApiData = () => {
             })
             .catch((error) => console.log(error));
     }, [dispatch]);
-
-    // return commits;
 };
 
 export default useGetGitHubApiData;
