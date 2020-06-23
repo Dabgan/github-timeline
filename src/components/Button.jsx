@@ -27,13 +27,11 @@ const StyledButton = styled.button`
     }
 `;
 
-const Button = ({ link, children }) => {
+const Button = ({ link: submit, children }) => {
     return (
         <>
-            {link ? (
-                <StyledButton as={Link} to={link}>
-                    {children}
-                </StyledButton>
+            {submit ? (
+                <StyledButton type="submit">{children}</StyledButton>
             ) : (
                 <StyledButton>{children}</StyledButton>
             )}
