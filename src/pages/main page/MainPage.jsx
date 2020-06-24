@@ -21,9 +21,7 @@ const MainPage = () => {
         axios(config)
             .then((res) => {
                 let resCommits = [];
-                // console.log(res.data);
                 const repos = res.data.repos_url;
-                // console.log(repos);
                 return repos;
                 // get and logout every commit on page
                 // const links = parse(res.headers.link);

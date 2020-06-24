@@ -1,7 +1,13 @@
 import { UPDATE_REPOS } from "./reposType";
 
 const initialState = {
-    repos: [],
+    repos: [
+        { name: "gabriel" },
+        { name: "agacia" },
+        { name: "pimpek" },
+        { name: "alien chyba" },
+        { name: "Project02-Technical_Documentation_Page" },
+    ],
 };
 
 const reposReducer = (state = initialState, action) => {
