@@ -11,8 +11,6 @@ const TimelineList = styled.ul`
 const Timeline = () => {
     const commits = useSelector((state) => state.commits.commits);
 
-    console.log(commits);
-
     return (
         <TimelineList>
             {commits.map((commit) => (
