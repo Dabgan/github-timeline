@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-const StyledButton = styled.button`
+const StyledButton = styled.button.attrs((props) => ({
+    type: props.submit ? "submit" : "",
+}))`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -14,6 +16,7 @@ const StyledButton = styled.button`
     background: ${(props) => props.theme.colors.powderWhite};
     font-weight: ${(props) => props.theme.font.weight.semibold};
     text-decoration: none;
+    cursor: pointer;
     transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out,
         background-color 0.3s ease-in-out;
 
@@ -26,15 +29,11 @@ const StyledButton = styled.button`
     }
 `;
 
-const Button = ({ link: submit, children }) => {
+const Button = ({ onClick, submit, children }) => {
     return (
-        <>
-            {submit ? (
-                <StyledButton type="submit">{children}</StyledButton>
-            ) : (
-                <StyledButton>{children}</StyledButton>
-            )}
-        </>
+        <StyledButton submit={submit} onClick={onClick}>
+            {children}
+        </StyledButton>
     );
 };
 

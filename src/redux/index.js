@@ -1,3 +1,7 @@
 export { updateCommits } from "./commits/commitsActions";
 export { setUsername } from "./username/usernameActions";
-export { updateRepos } from "./repos/reposActions";
+export {
+    updateRepos,
+    setNextPageFlag,
+    setRepoLink,
+} from "./repos/reposActions";

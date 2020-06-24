@@ -2,22 +2,24 @@ import React from "react";
 import * as styled from "./repos.styles";
 import { useSelector, useDispatch } from "react-redux";
 import { MainContainer } from "../../styles/global.styles";
-import { updateCommits } from "../../redux";
+import {
+    updateRepos,
+    updateCommits,
+    setNextPageFlag,
+    setRepoLink,
+} from "../../redux";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import formatDate from "../../formatDate";
+import Button from "../../components/Button";
+import parse from "parse-link-header";
 
 const Repos = () => {
-    const repos = useSelector((state) => state.repos.repos);
+    const { repos, nextPage, link } = useSelector((state) => state.repos);
     const username = useSelector((state) => state.username.username);
     const dispatch = useDispatch();
 
-    console.log(
-        "Repos site, those are repos:",
-        repos,
-        "and username",
-        username
-    );
+    console.log("How many times it will be rendered?");
 
     const getCommits = (repo) => {
         const config = {
@@ -27,10 +29,8 @@ const Repos = () => {
 
         axios(config)
             .then((res) => {
-                console.log(res.data);
                 let resCommits = [];
                 // get and logout every commit on page
-                // const links = parse(res.headers.link);
                 for (let i = 0; i < res.data.length; i++) {
                     const date = new Date(res.data[i].commit.committer.date);
                     resCommits.push({
@@ -39,16 +39,30 @@ const Repos = () => {
                     });
                 }
                 dispatch(updateCommits(resCommits));
-                // go to next page and do the same
-                // axios(links.next)
-                //     .then((res) => {
-                //         for (let i = 0; i < res.data.length; i++) {
-                //             // console.log(res.data[i].commit.message);
-                //             resCommits.push(res.data[i].commit.message);
-                //         }
-                //         console.log(resCommits);
-                //     })
-                //     .catch(() => console.log(`there is no next page`));
+            })
+            .catch((error) => console.log(error));
+    };
+
+    const getCommitsNextPage = () => {
+        axios(link)
+            .then((res) => {
+                // get link to the next page of repos
+                const links = parse(res.headers.link);
+                const nextLink = links.next.url;
+                dispatch(setRepoLink(nextLink));
+                return nextLink;
+            })
+            .then((resLink) => {
+                axios(resLink)
+                    .then((res) => {
+                        // update list of repositories
+                        const newRepos = [...repos, ...res.data];
+                        dispatch(updateRepos(newRepos));
+                        // if there is link to the next page, show button
+                        const links = parse(res.headers.link);
+                        dispatch(setNextPageFlag(links.next ? true : false));
+                    })
+                    .catch((error) => console.log(error));
             })
             .catch((error) => console.log(error));
     };
@@ -72,6 +86,9 @@ const Repos = () => {
                     </styled.Repo>
                 ))}
             </styled.Container>
+            {nextPage ? (
+                <Button onClick={getCommitsNextPage}>Next page</Button>
+            ) : null}
         </MainContainer>
     );
 };

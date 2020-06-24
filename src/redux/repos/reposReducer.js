@@ -1,4 +1,8 @@
-import { UPDATE_REPOS } from "./reposType";
+import {
+    UPDATE_REPOS,
+    SET_NEXT_PAGE_FLAG,
+    SET_REPOSITORY_LINK,
+} from "./reposType";
 
 const initialState = {
     repos: [
@@ -8,6 +12,8 @@ const initialState = {
         { name: "alien chyba", id: "4" },
         { name: "Project02-Technical_Documentation_Page", id: "5" },
     ],
+    nextPage: false,
+    link: "",
 };
 
 const reposReducer = (state = initialState, action) => {
@@ -16,6 +22,16 @@ const reposReducer = (state = initialState, action) => {
             return {
                 ...state,
                 repos: action.payload,
+            };
+        case SET_NEXT_PAGE_FLAG:
+            return {
+                ...state,
+                nextPage: action.payload,
+            };
+        case SET_REPOSITORY_LINK:
+            return {
+                ...state,
+                link: action.payload,
             };
         default:
             return state;

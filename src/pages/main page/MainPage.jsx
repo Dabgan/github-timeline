@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setUsername, updateRepos } from "../../redux";
+import {
+    setUsername,
+    updateRepos,
+    setNextPageFlag,
+    setRepoLink,
+} from "../../redux";
 import axios from "axios";
 import * as styled from "./mainPage.styles";
 import Button from "../../components/Button";
@@ -20,12 +25,13 @@ const MainPage = () => {
         axios(config)
             .then((res) => {
                 const repos = res.data.repos_url;
-                console.log(repos);
+                dispatch(setRepoLink(repos));
                 return repos;
             })
             .then((res) => {
                 axios(res).then((res) => {
                     dispatch(updateRepos(res.data));
+                    dispatch(setNextPageFlag(res.headers.link ? true : false));
                 });
             })
             .catch((error) => console.log(error));
