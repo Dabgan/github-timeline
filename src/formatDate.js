@@ -10,8 +10,8 @@ const getMonthName = (date) => {
 const formatDate = (date) => {
     const formattedDate = `
     ${addLeadingZeros(date.getDate())}
-    -${addLeadingZeros(getMonthName(date))}
-    -${date.getFullYear()}
+    - ${addLeadingZeros(getMonthName(date))}
+    - ${date.getFullYear()}
      at ${addLeadingZeros(date.getHours())}
      :${addLeadingZeros(date.getMinutes())}
      :${addLeadingZeros(date.getSeconds())}`;
