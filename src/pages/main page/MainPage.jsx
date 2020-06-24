@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from "react";
-import Button from "../../components/Button";
-import * as styled from "./mainPage.styles";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { setUsername, updateCommits, updateRepos } from "../../redux";
+import { useDispatch } from "react-redux";
+import { setUsername, updateRepos } from "../../redux";
 import axios from "axios";
-import formatDate from "../../formatDate";
+import * as styled from "./mainPage.styles";
+import Button from "../../components/Button";
 
 const MainPage = () => {
-    // const username = useSelector((state) => state.username.username);
+    const history = useHistory();
     const [name, setName] = useState("dabgan");
     const dispatch = useDispatch();
 
-    const getGithubApiCommits = (username) => {
+    const getRepositories = (username) => {
         const config = {
             method: "get",
             url: `https://api.github.com/users/${username}`,
@@ -20,29 +19,9 @@ const MainPage = () => {
 
         axios(config)
             .then((res) => {
-                let resCommits = [];
                 const repos = res.data.repos_url;
+                console.log(repos);
                 return repos;
-                // get and logout every commit on page
-                // const links = parse(res.headers.link);
-                // for (let i = 0; i < res.data.length; i++) {
-                //     const date = new Date(res.data[i].commit.committer.date);
-                //     resCommits.push({
-                //         message: res.data[i].commit.message,
-                //         date: formatDate(date),
-                //     });
-                // }
-                // dispatch(updateCommits(resCommits));
-                // go to next page and do the same
-                // axios(links.next)
-                //     .then((res) => {
-                //         for (let i = 0; i < res.data.length; i++) {
-                //             // console.log(res.data[i].commit.message);
-                //             resCommits.push(res.data[i].commit.message);
-                //         }
-                //         console.log(resCommits);
-                //     })
-                //     .catch(() => console.log(`there is no next page`));
             })
             .then((res) => {
                 axios(res).then((res) => {
@@ -52,12 +31,10 @@ const MainPage = () => {
             .catch((error) => console.log(error));
     };
 
-    let history = useHistory();
-
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(setUsername(name));
-        getGithubApiCommits(name);
+        getRepositories(name);
         history.push("/repos", {});
     };
 
@@ -65,7 +42,9 @@ const MainPage = () => {
         <styled.MainContainer onSubmit={(e) => handleSubmit(e)}>
             <styled.Title>Github timeline</styled.Title>
             <styled.Container>
-                <styled.Label htmlFor="username">Github username</styled.Label>
+                <styled.Label htmlFor="username">
+                    Enter github username:
+                </styled.Label>
                 <styled.Input
                     required
                     id="username"

@@ -43,6 +43,7 @@ export const Item = styled.div`
     padding: 15px;
     font-size: ${(props) => props.theme.font.size.body.s};
     background: #f45b69;
+    word-break: break-word;
     ::before {
         content: "";
         position: absolute;
