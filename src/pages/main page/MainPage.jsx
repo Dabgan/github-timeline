@@ -3,30 +3,27 @@ import Button from "../../components/Button";
 import * as styled from "./mainPage.styles";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setUsername, updateCommits } from "../../redux";
+import { setUsername, updateCommits, updateRepos } from "../../redux";
 import axios from "axios";
 import formatDate from "../../formatDate";
-// import useGetGitHubApiData from "./../../hooks/useGetGitHubApiData";
 
 const MainPage = () => {
     // const username = useSelector((state) => state.username.username);
     const [name, setName] = useState("dabgan");
     const dispatch = useDispatch();
-    // useGetGitHubApiData();
 
     const getGithubApiCommits = (username) => {
         const config = {
             method: "get",
-            // url: `https://api.github.com/repos/${username}/Snowshop/commits?page=1`,
             url: `https://api.github.com/users/${username}`,
         };
 
         axios(config)
             .then((res) => {
                 let resCommits = [];
-                console.log(res.data);
+                // console.log(res.data);
                 const repos = res.data.repos_url;
-                console.log(repos);
+                // console.log(repos);
                 return repos;
                 // get and logout every commit on page
                 // const links = parse(res.headers.link);
@@ -51,7 +48,7 @@ const MainPage = () => {
             })
             .then((res) => {
                 axios(res).then((res) => {
-                    console.log(res.data);
+                    dispatch(updateRepos(res.data));
                 });
             })
             .catch((error) => console.log(error));
@@ -63,7 +60,7 @@ const MainPage = () => {
         e.preventDefault();
         dispatch(setUsername(name));
         getGithubApiCommits(name);
-        history.push("/timeline", {});
+        history.push("/repos", {});
     };
 
     return (
