@@ -5,8 +5,10 @@ import { MainContainer } from "../../styles/global.styles";
 import {
     updateRepos,
     updateCommits,
-    setNextPageFlag,
+    setNextPageFlagRepos,
+    setNextPageFlagCommits,
     setRepoLink,
+    setCommitsLink,
 } from "../../redux";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -29,6 +31,7 @@ const Repos = () => {
 
         axios(config)
             .then((res) => {
+                console.log(res);
                 let resCommits = [];
                 // get and logout every commit on page
                 for (let i = 0; i < res.data.length; i++) {
@@ -39,11 +42,21 @@ const Repos = () => {
                     });
                 }
                 dispatch(updateCommits(resCommits));
+                return res;
+            })
+            .then((res) => {
+                // get link to the next page of repos
+                console.log(`commits res`, res);
+                const links = parse(res.headers.link);
+                console.log(links);
+                const nextLink = links.next.url;
+                dispatch(setCommitsLink(nextLink));
+                dispatch(setNextPageFlagCommits(nextLink ? true : false));
             })
             .catch((error) => console.log(error));
     };
 
-    const getCommitsNextPage = () => {
+    const getReposNextPage = () => {
         axios(link)
             .then((res) => {
                 // get link to the next page of repos
@@ -60,7 +73,9 @@ const Repos = () => {
                         dispatch(updateRepos(newRepos));
                         // if there is link to the next page, show button
                         const links = parse(res.headers.link);
-                        dispatch(setNextPageFlag(links.next ? true : false));
+                        dispatch(
+                            setNextPageFlagRepos(links.next ? true : false)
+                        );
                     })
                     .catch((error) => console.log(error));
             })
@@ -87,7 +102,7 @@ const Repos = () => {
                 ))}
             </styled.Container>
             {nextPage ? (
-                <Button onClick={getCommitsNextPage}>Next page</Button>
+                <Button onClick={getReposNextPage}>Next page</Button>
             ) : null}
         </MainContainer>
     );

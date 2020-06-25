@@ -1,6 +1,6 @@
 import {
     UPDATE_REPOS,
-    SET_NEXT_PAGE_FLAG,
+    SET_NEXT_PAGE_FLAG_REPOS,
     SET_REPOSITORY_LINK,
 } from "./reposType";
 
@@ -23,7 +23,7 @@ const reposReducer = (state = initialState, action) => {
                 ...state,
                 repos: action.payload,
             };
-        case SET_NEXT_PAGE_FLAG:
+        case SET_NEXT_PAGE_FLAG_REPOS:
             return {
                 ...state,
                 nextPage: action.payload,

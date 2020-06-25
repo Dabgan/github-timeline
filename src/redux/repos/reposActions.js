@@ -1,6 +1,6 @@
 import {
     UPDATE_REPOS,
-    SET_NEXT_PAGE_FLAG,
+    SET_NEXT_PAGE_FLAG_REPOS,
     SET_REPOSITORY_LINK,
 } from "./reposType";
 
@@ -11,9 +11,9 @@ export const updateRepos = (repos) => {
     };
 };
 
-export const setNextPageFlag = (boolean) => {
+export const setNextPageFlagRepos = (boolean) => {
     return {
-        type: SET_NEXT_PAGE_FLAG,
+        type: SET_NEXT_PAGE_FLAG_REPOS,
         payload: boolean,
     };
 };
