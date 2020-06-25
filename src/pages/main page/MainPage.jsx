@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import {
     setUsername,
     updateRepos,
-    setNextPageFlag,
+    setNextPageFlagRepos,
     setRepoLink,
 } from "../../redux";
 import axios from "axios";
@@ -31,7 +31,9 @@ const MainPage = () => {
             .then((res) => {
                 axios(res).then((res) => {
                     dispatch(updateRepos(res.data));
-                    dispatch(setNextPageFlag(res.headers.link ? true : false));
+                    dispatch(
+                        setNextPageFlagRepos(res.headers.link ? true : false)
+                    );
                 });
             })
             .catch((error) => console.log(error));
