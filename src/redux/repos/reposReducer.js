@@ -1,11 +1,13 @@
 import {
-    UPDATE_REPOS,
+    FETCH_REPOS_REQUEST,
+    FETCH_REPOS_SUCCESS,
+    FETCH_REPOS_FAILURE,
     SET_NEXT_PAGE_FLAG_REPOS,
     SET_REPOSITORY_LINK,
 } from "./reposType";
 
 const initialState = {
-    repos: [
+    data: [
         { name: "gabriel", id: "1" },
         { name: "agacia", id: "2" },
         { name: "pimpek", id: "3" },
@@ -14,14 +16,26 @@ const initialState = {
     ],
     nextPage: false,
     link: "",
+    error: "",
 };
 
 const reposReducer = (state = initialState, action) => {
     switch (action.type) {
-        case UPDATE_REPOS:
+        case FETCH_REPOS_REQUEST:
             return {
                 ...state,
-                repos: action.payload,
+            };
+        case FETCH_REPOS_SUCCESS:
+            return {
+                ...state,
+                data: action.payload,
+                error: "",
+            };
+        case FETCH_REPOS_FAILURE:
+            return {
+                ...state,
+                data: [],
+                error: action.payload,
             };
         case SET_NEXT_PAGE_FLAG_REPOS:
             return {

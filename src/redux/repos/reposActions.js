@@ -1,26 +1,98 @@
+import axios from "axios";
+import parse from "parse-link-header";
 import {
-    UPDATE_REPOS,
+    FETCH_REPOS_REQUEST,
+    FETCH_REPOS_SUCCESS,
+    FETCH_REPOS_FAILURE,
     SET_NEXT_PAGE_FLAG_REPOS,
     SET_REPOSITORY_LINK,
 } from "./reposType";
 
-export const updateRepos = (repos) => {
+export const fetchReposRequest = () => {
     return {
-        type: UPDATE_REPOS,
+        type: FETCH_REPOS_REQUEST,
+    };
+};
+export const fetchReposSuccess = (repos) => {
+    return {
+        type: FETCH_REPOS_SUCCESS,
         payload: repos,
     };
 };
-
+export const fetchReposFailure = (error) => {
+    return {
+        type: FETCH_REPOS_FAILURE,
+        payload: error,
+    };
+};
 export const setNextPageFlagRepos = (boolean) => {
     return {
         type: SET_NEXT_PAGE_FLAG_REPOS,
         payload: boolean,
     };
 };
-
 export const setRepoLink = (link) => {
     return {
         type: SET_REPOSITORY_LINK,
         payload: link,
     };
+};
+
+export const fetchRepos = (username) => {
+    return (dispatch) => {
+        dispatch(fetchReposRequest);
+        const config = {
+            method: "get",
+            url: `https://api.github.com/users/${username}`,
+        };
+        axios(config)
+            .then((res) => {
+                const reposUrl = res.data.repos_url;
+                dispatch(setRepoLink(reposUrl));
+                return reposUrl;
+            })
+            .then((reposUrl) => {
+                axios(reposUrl)
+                    .then((res) => {
+                        findNextReposLink(dispatch, res);
+                        dispatch(fetchReposSuccess(res.data));
+                    })
+                    .catch((error) => fetchReposFailure(error));
+            })
+            .catch((error) => fetchReposFailure(error));
+    };
+};
+
+export const fetchReposNextPage = (link, data) => {
+    return (dispatch) => {
+        dispatch(fetchReposRequest);
+        axios(link)
+            .then((res) => {
+                // get link to the next page of repos
+                const links = parse(res.headers.link);
+                const nextLink = links.next.url;
+                dispatch(setRepoLink(nextLink));
+                return nextLink;
+            })
+            .then((resLink) => {
+                axios(resLink)
+                    .then((res) => {
+                        findNextReposLink(dispatch, res);
+                        // update list of repositories
+                        const newRepos = [...data, ...res.data];
+                        dispatch(fetchReposSuccess(newRepos));
+                    })
+                    .catch((error) => fetchReposFailure(error));
+            })
+            .catch((error) => fetchReposFailure(error));
+    };
+};
+
+// if there is link to the next page, set new link and show button
+const findNextReposLink = (dispatch, res) => {
+    if (parse(res.headers.link)) {
+        const isNextPage = parse(res.headers.link).next ? true : false;
+        return dispatch(setNextPageFlagRepos(isNextPage));
+    }
+    return;
 };
