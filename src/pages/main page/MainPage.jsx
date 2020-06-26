@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import {
-    setUsername,
-    updateRepos,
-    setNextPageFlagRepos,
-    setRepoLink,
-} from "../../redux";
-import axios from "axios";
+import { setUsername, fetchRepos } from "../../redux";
 import * as styled from "./mainPage.styles";
 import Button from "../../components/Button";
 
@@ -16,34 +10,11 @@ const MainPage = () => {
     const [name, setName] = useState("dabgan");
     const dispatch = useDispatch();
 
-    const getRepositories = (username) => {
-        const config = {
-            method: "get",
-            url: `https://api.github.com/users/${username}`,
-        };
-
-        axios(config)
-            .then((res) => {
-                const repos = res.data.repos_url;
-                dispatch(setRepoLink(repos));
-                return repos;
-            })
-            .then((res) => {
-                axios(res).then((res) => {
-                    dispatch(updateRepos(res.data));
-                    dispatch(
-                        setNextPageFlagRepos(res.headers.link ? true : false)
-                    );
-                });
-            })
-            .catch((error) => console.log(error));
-    };
-
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(setUsername(name));
-        getRepositories(name);
-        history.push("/repos", {});
+        dispatch(fetchRepos(name));
+        history.push("/repos");
     };
 
     return (
