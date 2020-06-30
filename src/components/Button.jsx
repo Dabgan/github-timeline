@@ -4,28 +4,37 @@ import styled from "styled-components";
 const StyledButton = styled.button.attrs((props) => ({
     type: props.submit ? "submit" : "",
 }))`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px 20px;
-    color: inherit;
-    border: 2px solid #000;
-    box-shadow: 1px 1px 2px 1px ${(props) => props.theme.colors.onyx};
-    border-radius: 5px;
-    font-size: ${(props) => props.theme.font.size.body.m};
-    background: ${(props) => props.theme.colors.powderWhite};
-    font-weight: ${(props) => props.theme.font.weight.semibold};
-    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    border: 3px solid ${(props) => props.theme.colors.secondary};
+    border-radius: ${(props) => props.theme.borderRadius};
+    font-size: ${(props) => props.theme.font.size.body.xs};
+    padding: ${(props) => props.theme.padding.xs};
+    line-height: 2;
+    text-transform: uppercase;
+    outline: none;
+    overflow: hidden;
     cursor: pointer;
-    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out,
-        background-color 0.3s ease-in-out;
-
+    transition: all 0.5s;
     &:hover {
-        box-shadow: 3px 3px 4px 2px ${(props) => props.theme.colors.onyx};
-        transform: translateY(-3px);
+        transform: translateY(0px);
+        ::after {
+            transform: translate3D(0, 0, 0);
+            transition: all 0.5s;
+        }
+    }
+    &::after,
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
         background: ${(props) => props.theme.colors.lightBlue};
-        color: inherit;
-        text-decoration: none;
+        z-index: -1;
+        transition: all 0.5s;
+        transform: translate3D(-101%, 0, 0);
     }
 `;
 

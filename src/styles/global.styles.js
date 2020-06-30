@@ -2,6 +2,7 @@ import { createGlobalStyle } from "styled-components";
 import styled from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -14,7 +15,26 @@ const GlobalStyle = createGlobalStyle`
 }
 body {
     font-size: 1.5rem;
-    background: ${(props) => props.theme.colors.persianGreen}
+    /* font-family: 'Balsamiq Sans', cursive; */
+    /* font-family: 'Concert One', cursive; */
+    /* font-family: 'Fontdiner Swanky', cursive; */
+    /* font-family: 'Gloria Hallelujah', cursive; */
+    /* font-family: 'Notable', sans-serif; */
+    /* font-family: 'Permanent Marker', cursive; */
+    font-family: 'Pangolin', cursive;
+    letter-spacing: 0.25rem;
+    color: ${(props) => props.theme.font.color.main};
+ }
+
+ button {
+    /* font-family: 'Balsamiq Sans', cursive; */
+    /* font-family: 'Concert One', cursive; */
+    /* font-family: 'Fontdiner Swanky', cursive; */
+    /* font-family: 'Gloria Hallelujah', cursive; */
+    /* font-family: 'Notable', sans-serif; */
+    /* font-family: 'Permanent Marker', cursive; */
+    font-family: 'Pangolin', cursive;
+    letter-spacing: 0.0625em;
  }
     
 `;

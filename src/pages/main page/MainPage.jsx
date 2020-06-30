@@ -18,9 +18,9 @@ const MainPage = () => {
     };
 
     return (
-        <styled.MainContainer onSubmit={(e) => handleSubmit(e)}>
-            <styled.Title>Github timeline</styled.Title>
-            <styled.Container>
+        <styled.MainContainer>
+            <styled.Container onSubmit={(e) => handleSubmit(e)}>
+                <styled.Title>Github timeline</styled.Title>
                 <styled.Label htmlFor="username">
                     Enter github username:
                 </styled.Label>
@@ -32,8 +32,8 @@ const MainPage = () => {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
+                <Button submit>Show commits</Button>
             </styled.Container>
-            <Button submit>Show commits</Button>
         </styled.MainContainer>
     );
 };

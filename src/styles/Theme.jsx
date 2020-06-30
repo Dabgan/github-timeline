@@ -20,6 +20,7 @@ const device = {
 
 const font = {
     family: ["sans-serif", "Roboto"],
+    color: { main: "#FCC926", secondary: `#272727`, black: "#000000" },
     weight: {
         regular: "400",
         semibold: "500",
@@ -31,6 +32,7 @@ const font = {
             m: "3.6rem",
         },
         body: {
+            xs: "1rem",
             s: "1.22rem",
             m: "1.44rem",
         },
@@ -38,11 +40,15 @@ const font = {
 };
 
 const colors = {
+    main: "#FCC926",
+    secondary: "#0DFDC9",
+    ternary: "#EF26FC",
     powderWhite: "#FFFDF9",
     persianGreen: "#06B49A",
-    lightBlue: "#AFDBD2",
+    lightBlue: "#0DFDC9",
     onyx: "#36313D",
-    red: "red",
+    black: "#000000",
+    lightBrown: "#B08600",
 };
 
 const theme = {
@@ -50,16 +56,19 @@ const theme = {
     font,
     colors,
     padding: {
-        s: "1rem",
-        m: "2rem",
-        l: "3rem",
+        xs: "0.7rem",
+        s: "1.5rem",
+        m: "2.5rem",
+        l: "4rem",
     },
     margin: {
-        xs: "1rem",
-        s: "3rem",
-        m: "5rem",
-        l: "6rem",
+        xs: "0.7rem",
+        s: "2rem",
+        m: "4rem",
+        l: "8rem",
+        xl: "13rem",
     },
+    borderRadius: "10px",
 };
 
 const Theme = ({ children }) => (

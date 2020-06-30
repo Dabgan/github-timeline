@@ -1,11 +1,15 @@
 import styled from "styled-components";
+import time from "./../../assets/images/time.jpg";
 
-export const MainContainer = styled.form`
+export const MainContainer = styled.div`
     display: flex;
     flex-flow: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background-image: url(${time});
+    background-size: 100% auto;
+    background-repeat: no-repeat;
 `;
 
 export const Title = styled.h1`
@@ -13,12 +17,15 @@ export const Title = styled.h1`
     margin-bottom: ${(props) => props.theme.margin.s};
 `;
 
-export const Container = styled.div`
+export const Container = styled.form`
     display: flex;
     flex-flow: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    padding: ${(props) => props.theme.padding.s};
+    padding: ${(props) => props.theme.padding.l};
+    button {
+        margin-top: ${(props) => props.theme.margin.s};
+    }
 `;
 
 export const Label = styled.label`
@@ -26,6 +33,9 @@ export const Label = styled.label`
 `;
 
 export const Input = styled.input`
-    padding: ${(props) => props.theme.padding.s};
+    border: 3px solid ${(props) => props.theme.colors.secondary};
+    padding: ${(props) => props.theme.padding.xs};
     font-size: ${(props) => props.theme.font.size.body.m};
+    border-radius: ${(props) => props.theme.borderRadius};
+    outline: none;
 `;
