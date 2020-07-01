@@ -30,6 +30,7 @@ export const Container = styled.form`
 
 export const Label = styled.label`
     margin-bottom: ${(props) => props.theme.margin.xs};
+    font-size: ${(props) => props.theme.font.size.body.s};
 `;
 
 export const Input = styled.input`
