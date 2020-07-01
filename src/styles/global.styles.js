@@ -14,7 +14,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
 }
 body {
-    font-size: 1.5rem;
+    font-size: 14px;
     /* font-family: 'Balsamiq Sans', cursive; */
     /* font-family: 'Concert One', cursive; */
     /* font-family: 'Fontdiner Swanky', cursive; */
@@ -22,8 +22,9 @@ body {
     /* font-family: 'Notable', sans-serif; */
     /* font-family: 'Permanent Marker', cursive; */
     font-family: 'Pangolin', cursive;
-    letter-spacing: 0.25rem;
+    letter-spacing: 0.14rem;
     color: ${(props) => props.theme.font.color.main};
+    background: ${(props) => props.theme.colors.background};
  }
 
  button {
@@ -40,7 +41,6 @@ body {
 `;
 
 export const MainContainer = styled.div`
-    border: 2px solid #f11b1b;
     display: flex;
     flex-flow: column;
     justify-content: center;
