@@ -1,7 +1,7 @@
 import React from "react";
 import * as styled from "./repos.styles";
 import { useSelector, useDispatch } from "react-redux";
-import { MainContainer } from "../../styles/global.styles";
+import { MainContainer, BtnContainer } from "../../styles/global.styles";
 import { fetchReposNextPage, fetchCommits } from "../../redux";
 import { Link } from "react-router-dom";
 import Button from "../../components/Button";
@@ -12,7 +12,7 @@ const Repos = () => {
     const { data, nextPage, link } = useSelector((state) => state.repos);
     const username = useSelector((state) => state.username.username);
     const dispatch = useDispatch();
-
+    // nextPage = true;
     console.log("How many times it will be rendered?");
 
     const getCommits = (repo) => {
@@ -26,7 +26,7 @@ const Repos = () => {
     return (
         <MainContainer>
             <styled.Title>
-                Here are repositories of user {username}.
+                Here are repositories of user <span>{username}</span>.
             </styled.Title>
             <p>Click one to see commits timeline!</p>
             <styled.Container>
@@ -47,10 +47,12 @@ const Repos = () => {
                         </styled.RepoInfo>
                     </styled.Repo>
                 ))}
+            </styled.Container>
+            <BtnContainer>
                 {nextPage ? (
                     <Button onClick={getNextPageOfRepos}>Next page</Button>
                 ) : null}
-            </styled.Container>
+            </BtnContainer>
         </MainContainer>
     );
 };

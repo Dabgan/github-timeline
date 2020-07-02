@@ -7,10 +7,7 @@ import {
 } from "./commitsType";
 
 const initialState = {
-    data: [
-        { message: "initial guwno", date: "6-9" },
-        { message: "test commit", date: "9-6" },
-    ],
+    data: [],
     nextPage: false,
     link: "",
     error: "",

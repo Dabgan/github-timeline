@@ -7,13 +7,7 @@ import {
 } from "./reposType";
 
 const initialState = {
-    data: [
-        { name: "gabriel", id: "1" },
-        { name: "agacia", id: "2" },
-        { name: "pimpek", id: "3" },
-        { name: "alien chyba", id: "4" },
-        { name: "Project02-Technical_Documentation_Page", id: "5" },
-    ],
+    data: [],
     nextPage: false,
     link: "",
     error: "",

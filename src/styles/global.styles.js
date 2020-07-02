@@ -48,4 +48,17 @@ export const MainContainer = styled.div`
     min-height: 100vh;
 `;
 
+export const BtnContainer = styled.div`
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+    width: 68rem;
+    padding: 1.5rem;
+    @media (min-width: 320px) and (max-width: 1181px) {
+        margin: 1rem 0;
+        width: 100%;
+        justify-content: space-between;
+    }
+`;
+
 export default GlobalStyle;
