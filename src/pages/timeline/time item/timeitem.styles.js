@@ -5,8 +5,13 @@ export const ItemContainer = styled.li`
     position: relative;
     width: 6px;
     margin: 0 auto;
-    padding-top: 50px;
-    background: #fff;
+    padding-top: 2.5rem;
+    background: ${(props) => props.theme.colors.grey};
+    &:hover {
+        time {
+            text-decoration: underline;
+        }
+    }
     ::after {
         content: "";
         position: absolute;
@@ -21,17 +26,19 @@ export const ItemContainer = styled.li`
     :nth-child(odd) div {
         left: 45px;
         ::before {
-            left: -15px;
+            left: -16px;
             border-width: 8px 16px 8px 0;
-            border-color: transparent #f45b69 transparent transparent;
+            border-color: transparent ${(props) => props.theme.colors.secondary}
+                transparent transparent;
         }
     }
     :nth-child(even) div {
         left: -439px;
         ::before {
-            right: -15px;
+            right: -16px;
             border-width: 8px 0 8px 16px;
-            border-color: transparent transparent transparent #f45b69;
+            border-color: transparent transparent transparent
+                ${(props) => props.theme.colors.secondary};
         }
     }
 `;
@@ -44,6 +51,11 @@ export const Item = styled.div`
     font-size: ${(props) => props.theme.font.size.body.s};
     background: #f45b69;
     word-break: break-word;
+    border: 2px solid ${(props) => props.theme.colors.secondary};
+    background: ${(props) => props.theme.colors.grey};
+    color: ${(props) => props.theme.font.color.secondary};
+    border-radius: ${(props) => props.theme.borderRadius};
+    font-size: ${(props) => props.theme.font.size.body.xs};
     ::before {
         content: "";
         position: absolute;
@@ -59,4 +71,6 @@ export const Time = styled.time`
     font-size: 1.2rem;
     font-weight: bold;
     margin-bottom: 8px;
+    color: ${(props) => props.theme.font.color.main};
+    font-size: ${(props) => props.theme.font.size.body.s};
 `;
