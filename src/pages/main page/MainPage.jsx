@@ -7,7 +7,7 @@ import Button from "../../components/Button";
 
 const MainPage = () => {
     const history = useHistory();
-    const [name, setName] = useState("gabriel");
+    const [name, setName] = useState("dabgan");
     const dispatch = useDispatch();
 
     const handleSubmit = (e) => {

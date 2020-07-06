@@ -52,7 +52,6 @@ export const BtnContainer = styled.div`
     display: flex;
     flex-flow: row;
     justify-content: space-around;
-    width: 68rem;
     padding: 1.5rem;
     @media (min-width: 320px) and (max-width: 1181px) {
         margin: 1rem 0;

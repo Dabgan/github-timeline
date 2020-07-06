@@ -28,6 +28,7 @@ const font = {
     },
     size: {
         header: {
+            xs: "1.9rem",
             s: "2.7rem",
             m: "3.6rem",
         },

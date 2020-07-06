@@ -14,8 +14,8 @@ const rotate = keyframes`
 
 const LoaderIcon = styled.div`
     font-size: ${(props) => props.size}rem;
-    margin: auto;
-    display: ${(props) => (props.loading ? "block" : "none")};
+    margin: 1rem auto;
+    display: ${(props) => (props.loading ? "inherit" : "none")};
     animation: ${rotate} 1.3s infinite linear;
 `;
 
