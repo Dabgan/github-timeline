@@ -2,29 +2,10 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCommitsNextPage } from "../../redux";
 import TimeItem from "./time item/TimeItem";
-import { MainContainer, BtnContainer } from "../../styles/global.styles";
-import styled from "styled-components";
-import Button from "../../components/Button";
+import { MainContainer } from "../../styles/global.styles";
 import Loader from "../../components/Loader";
-
-const TimelineList = styled.ul`
-    display: flex;
-    flex-flow: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    list-style-type: none;
-    position: relative;
-    width: 6px;
-    margin: 0 auto;
-    padding: 7rem 0;
-    background: ${(props) => props.theme.colors.grey};
-`;
-
-export const Title = styled.h1`
-    font-size: ${(props) => props.theme.font.size.header.s};
-    text-align: center;
-`;
+import InfiniteScroll from "react-infinite-scroll-component";
+import * as styled from "./timeline.styles";
 
 const Timeline = () => {
     const { data, nextPage, link, loading, loadingNextPage } = useSelector(
@@ -35,40 +16,41 @@ const Timeline = () => {
     const getNextPageOfCommits = () => {
         dispatch(fetchCommitsNextPage(data, link));
     };
+
     return (
         <>
             {loading ? (
                 <MainContainer>
-                    <Loader loading={loading ? 1 : 0} size={10} />
+                    <Loader loading={loading ? 1 : 0} size={8} />
                 </MainContainer>
             ) : (
-                <TimelineList>
-                    <Title>Commits timeline</Title>
-                    {data.map((commit) => (
-                        <TimeItem date={commit.date} key={commit.date}>
-                            {commit.message}
-                        </TimeItem>
-                    ))}
-
-                    <BtnContainer style={{ marginTop: "5rem" }}>
-                        {nextPage ? (
-                            <>
-                                {loadingNextPage ? (
-                                    <Loader
-                                        loading={loadingNextPage ? 1 : 0}
-                                        size={3}
-                                    />
-                                ) : (
-                                    <Button onClick={getNextPageOfCommits}>
-                                        Load more commits
-                                    </Button>
-                                )}
-                            </>
-                        ) : (
-                            <></>
-                        )}
-                    </BtnContainer>
-                </TimelineList>
+                <InfiniteScroll
+                    dataLength={data.length}
+                    next={getNextPageOfCommits}
+                    style={styled.InfinityLoaderStyles}
+                    hasMore={nextPage}
+                    scrollThreshold={1}
+                    loader={
+                        <Loader loading={loadingNextPage ? 1 : 0} size={8} />
+                    }
+                    endMessage={
+                        <styled.EndMessage>
+                            <p>
+                                That's it! You've reached the beginning of this
+                                project :)
+                            </p>
+                        </styled.EndMessage>
+                    }
+                >
+                    <styled.TimelineList>
+                        <styled.Title>Commits timeline</styled.Title>
+                        {data.map((commit) => (
+                            <TimeItem date={commit.date} key={commit.date}>
+                                {commit.message}
+                            </TimeItem>
+                        ))}
+                    </styled.TimelineList>
+                </InfiniteScroll>
             )}
         </>
     );
