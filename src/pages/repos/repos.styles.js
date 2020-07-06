@@ -8,7 +8,6 @@ export const Container = styled.div`
     width: 68rem;
     height: 31.5rem;
     margin-top: ${(props) => props.theme.margin.s};
-    /* border: 2px solid #2ce90a; */
     overflow: auto;
 `;
 

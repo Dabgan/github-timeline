@@ -7,7 +7,7 @@ import Button from "../../components/Button";
 
 const MainPage = () => {
     const history = useHistory();
-    const [name, setName] = useState("dabgan");
+    const [name, setName] = useState("gabriel");
     const dispatch = useDispatch();
 
     const handleSubmit = (e) => {
@@ -32,6 +32,7 @@ const MainPage = () => {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
+
                 <Button submit>Show commits</Button>
             </styled.Container>
         </styled.MainContainer>

@@ -8,6 +8,7 @@ import {
     FETCH_COMMITS_FAILURE,
     SET_NEXT_PAGE_FLAG_COMMITS,
     SET_COMMITS_LINK,
+    FETCH_NEXT_PAGE,
 } from "./commitsType";
 
 export const fetchCommitsRequest = () => {
@@ -27,6 +28,11 @@ export const fetchCommitsFailure = (error) => {
         payload: error,
     };
 };
+export const fetchNextPage = () => {
+    return {
+        type: FETCH_NEXT_PAGE,
+    };
+};
 
 export const setNextPageFlagCommits = (boolean) => {
     return {
@@ -44,7 +50,7 @@ export const setCommitsLink = (link) => {
 
 export const fetchCommits = (username, repo) => {
     return (dispatch) => {
-        dispatch(fetchCommitsRequest);
+        dispatch(fetchCommitsRequest());
         const config = {
             method: "get",
             url: `https://api.github.com/repos/${username}/${repo}/commits`,
@@ -67,7 +73,7 @@ export const fetchCommits = (username, repo) => {
 
 export const fetchCommitsNextPage = (commits, reposlink) => {
     return (dispatch) => {
-        dispatch(fetchCommitsRequest);
+        dispatch(fetchNextPage());
         axios(reposlink)
             .then((res) => {
                 dispatch(
