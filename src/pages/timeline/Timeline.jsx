@@ -2,9 +2,10 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCommitsNextPage } from "../../redux";
 import TimeItem from "./time item/TimeItem";
-import { BtnContainer } from "../../styles/global.styles";
+import { MainContainer, BtnContainer } from "../../styles/global.styles";
 import styled from "styled-components";
 import Button from "../../components/Button";
+import Loader from "../../components/Loader";
 
 const TimelineList = styled.ul`
     display: flex;
@@ -26,28 +27,50 @@ export const Title = styled.h1`
 `;
 
 const Timeline = () => {
-    const { data, nextPage, link } = useSelector((state) => state.commits);
+    const { data, nextPage, link, loading, loadingNextPage } = useSelector(
+        (state) => state.commits
+    );
     const dispatch = useDispatch();
 
     const getNextPageOfCommits = () => {
         dispatch(fetchCommitsNextPage(data, link));
     };
     return (
-        <TimelineList>
-            <Title>Commits timeline</Title>
-            {data.map((commit) => (
-                <TimeItem date={commit.date} key={commit.date}>
-                    {commit.message}
-                </TimeItem>
-            ))}
-            <BtnContainer style={{ marginTop: "5rem" }}>
-                {nextPage ? (
-                    <Button onClick={getNextPageOfCommits}>
-                        Load more commits
-                    </Button>
-                ) : null}
-            </BtnContainer>
-        </TimelineList>
+        <>
+            {loading ? (
+                <MainContainer>
+                    <Loader loading={loading ? 1 : 0} size={10} />
+                </MainContainer>
+            ) : (
+                <TimelineList>
+                    <Title>Commits timeline</Title>
+                    {data.map((commit) => (
+                        <TimeItem date={commit.date} key={commit.date}>
+                            {commit.message}
+                        </TimeItem>
+                    ))}
+
+                    <BtnContainer style={{ marginTop: "5rem" }}>
+                        {nextPage ? (
+                            <>
+                                {loadingNextPage ? (
+                                    <Loader
+                                        loading={loadingNextPage ? 1 : 0}
+                                        size={3}
+                                    />
+                                ) : (
+                                    <Button onClick={getNextPageOfCommits}>
+                                        Load more commits
+                                    </Button>
+                                )}
+                            </>
+                        ) : (
+                            <></>
+                        )}
+                    </BtnContainer>
+                </TimelineList>
+            )}
+        </>
     );
 };
 

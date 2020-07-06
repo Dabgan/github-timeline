@@ -4,6 +4,7 @@ import {
     FETCH_REPOS_REQUEST,
     FETCH_REPOS_SUCCESS,
     FETCH_REPOS_FAILURE,
+    FETCH_NEXT_PAGE,
     SET_NEXT_PAGE_FLAG_REPOS,
     SET_REPOSITORY_LINK,
 } from "./reposType";
@@ -25,6 +26,13 @@ export const fetchReposFailure = (error) => {
         payload: error,
     };
 };
+
+export const fetchNextPage = () => {
+    return {
+        type: FETCH_NEXT_PAGE,
+    };
+};
+
 export const setNextPageFlagRepos = (boolean) => {
     return {
         type: SET_NEXT_PAGE_FLAG_REPOS,
@@ -40,7 +48,7 @@ export const setRepoLink = (link) => {
 
 export const fetchRepos = (username) => {
     return (dispatch) => {
-        dispatch(fetchReposRequest);
+        dispatch(fetchReposRequest());
         const config = {
             method: "get",
             url: `https://api.github.com/users/${username}`,
@@ -65,11 +73,12 @@ export const fetchRepos = (username) => {
 
 export const fetchReposNextPage = (link, data) => {
     return (dispatch) => {
-        dispatch(fetchReposRequest);
+        dispatch(fetchNextPage());
         axios(link)
             .then((res) => {
                 // get link to the next page of repos
                 const links = parse(res.headers.link);
+                console.log(links);
                 const nextLink = links.next.url;
                 dispatch(setRepoLink(nextLink));
                 return nextLink;
