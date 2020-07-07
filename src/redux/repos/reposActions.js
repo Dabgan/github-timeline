@@ -46,7 +46,7 @@ export const setRepoLink = (link) => {
     };
 };
 
-export const fetchRepos = (username) => {
+export const fetchRepos = (username, history) => {
     return (dispatch) => {
         dispatch(fetchReposRequest());
         const config = {
@@ -55,6 +55,7 @@ export const fetchRepos = (username) => {
         };
         axios(config)
             .then((res) => {
+                history.push("/repos");
                 const reposUrl = res.data.repos_url;
                 dispatch(setRepoLink(reposUrl));
                 return reposUrl;
@@ -65,9 +66,11 @@ export const fetchRepos = (username) => {
                         findNextReposLink(dispatch, res);
                         dispatch(fetchReposSuccess(res.data));
                     })
-                    .catch((error) => fetchReposFailure(error));
+                    .catch((error) => dispatch(fetchReposFailure(error)));
             })
-            .catch((error) => fetchReposFailure(error));
+            .catch((error) => {
+                dispatch(fetchReposFailure(error.message));
+            });
     };
 };
 
@@ -78,7 +81,6 @@ export const fetchReposNextPage = (link, data) => {
             .then((res) => {
                 // get link to the next page of repos
                 const links = parse(res.headers.link);
-                console.log(links);
                 const nextLink = links.next.url;
                 dispatch(setRepoLink(nextLink));
                 return nextLink;
@@ -91,9 +93,9 @@ export const fetchReposNextPage = (link, data) => {
                         const newRepos = [...data, ...res.data];
                         dispatch(fetchReposSuccess(newRepos));
                     })
-                    .catch((error) => fetchReposFailure(error));
+                    .catch((error) => dispatch(fetchReposFailure(error)));
             })
-            .catch((error) => fetchReposFailure(error));
+            .catch((error) => dispatch(fetchReposFailure(error)));
     };
 };
 

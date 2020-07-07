@@ -54,6 +54,7 @@ const colors = {
     black: "#000000",
     grey: "#31363F",
     lightBrown: "#B08600",
+    error: "#ff311f",
 };
 
 const theme = {
