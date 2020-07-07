@@ -64,10 +64,7 @@ export const fetchCommits = (username, repo) => {
             .then((res) => {
                 findNextCommitsLink(dispatch, res);
             })
-            .catch((error) => {
-                dispatch(fetchCommitsFailure(error.message));
-                console.log(error);
-            });
+            .catch((error) => dispatch(fetchCommitsFailure(error)));
     };
 };
 
@@ -84,10 +81,7 @@ export const fetchCommitsNextPage = (commits, reposlink) => {
             .then((res) => {
                 findNextCommitsLink(dispatch, res);
             })
-            .catch((error) => {
-                dispatch(fetchCommitsFailure(error.message));
-                console.log(error);
-            });
+            .catch((error) => dispatch(fetchCommitsFailure(error)));
     };
 };
 

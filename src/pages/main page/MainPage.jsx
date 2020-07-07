@@ -1,20 +1,22 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { setUsername, fetchRepos } from "../../redux";
 import * as styled from "./mainPage.styles";
 import Button from "../../components/Button";
 
 const MainPage = () => {
     const history = useHistory();
+    const { error } = useSelector((state) => state.repos);
     const [name, setName] = useState("dabgan");
     const dispatch = useDispatch();
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        // stopPropagation prevents errors when clicking enter on input with LastPass extension installed
+        e.stopPropagation();
         dispatch(setUsername(name));
-        dispatch(fetchRepos(name));
-        history.push("/repos");
+        dispatch(fetchRepos(name, history));
     };
 
     return (
@@ -32,7 +34,11 @@ const MainPage = () => {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
-
+                {error ? (
+                    <styled.ErrorMsg>
+                        User not found. Please try different one.
+                    </styled.ErrorMsg>
+                ) : null}
                 <Button submit>Show commits</Button>
             </styled.Container>
         </styled.MainContainer>

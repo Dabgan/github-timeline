@@ -40,3 +40,8 @@ export const Input = styled.input`
     border-radius: ${(props) => props.theme.borderRadius};
     outline: none;
 `;
+
+export const ErrorMsg = styled.div`
+    color: ${(props) => props.theme.colors.error} !important;
+    margin-top: ${(props) => props.theme.margin.xs};
+`;
