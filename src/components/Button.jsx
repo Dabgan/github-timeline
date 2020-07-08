@@ -4,8 +4,6 @@ import styled from "styled-components";
 const StyledButton = styled.button.attrs((props) => ({
     type: props.submit ? "submit" : "",
 }))`
-    display: inline-block;
-    position: relative;
     border: 3px solid ${(props) => props.theme.colors.secondary};
     border-radius: ${(props) => props.theme.borderRadius};
     font-size: ${(props) => props.theme.font.size.body.xs};
@@ -14,27 +12,35 @@ const StyledButton = styled.button.attrs((props) => ({
     text-transform: uppercase;
     outline: none;
     overflow: hidden;
+    position: relative;
     cursor: pointer;
+    z-index: 1;
     transition: all 0.5s;
-    &:hover {
-        transform: translateY(0px);
-        ::after {
-            transform: translate3D(0, 0, 0);
-            transition: all 0.5s;
-        }
+    :hover {
+        color: black;
     }
-    &::after,
-    &::before {
+    ::after {
         content: "";
         position: absolute;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        background: ${(props) => props.theme.colors.lightBlue};
         z-index: -1;
-        transition: all 0.5s;
-        transform: translate3D(-101%, 0, 0);
+        -webkit-transition: all 0.4s;
+        -moz-transition: all 0.4s;
+        transition: all 0.4s;
+        width: 0;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: ${(props) => props.theme.colors.secondary};
+    }
+    :hover {
+        ::after {
+            width: 100%;
+        }
+    }
+    :active {
+        ::after {
+            width: 100%;
+        }
     }
 `;
 

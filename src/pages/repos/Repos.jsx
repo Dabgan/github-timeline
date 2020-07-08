@@ -10,12 +10,16 @@ import repoIcon from "@iconify/icons-octicon/repo";
 import Loader from "../../components/Loader";
 
 const Repos = () => {
+    const username = useSelector((state) => state.username.username);
+    const dispatch = useDispatch();
     const { data, nextPage, link, loading, loadingNextPage } = useSelector(
         (state) => state.repos
     );
-    const username = useSelector((state) => state.username.username);
-    const dispatch = useDispatch();
     console.log("How many times it will be rendered?");
+
+    const sortedRepos = data.sort((a, b) => {
+        return new Date(b.created_at) - new Date(a.created_at);
+    });
 
     const getCommits = (repo) => {
         dispatch(fetchCommits(username, repo));
@@ -37,7 +41,7 @@ const Repos = () => {
                     <Loader loading={loading ? 1 : 0} size={10} />
                 ) : (
                     <>
-                        {data.map((repo) => (
+                        {sortedRepos.map((repo) => (
                             <styled.Repo key={repo.id}>
                                 <styled.RepoInfo
                                     as={Link}

@@ -55,6 +55,7 @@ export const fetchRepos = (username, history) => {
         };
         axios(config)
             .then((res) => {
+                // go to /repos page and start loading data if username is correct
                 history.push("/repos");
                 const reposUrl = res.data.repos_url;
                 dispatch(setRepoLink(reposUrl));
