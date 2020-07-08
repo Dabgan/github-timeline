@@ -37,7 +37,7 @@ const Timeline = () => {
                         <styled.EndMessage>
                             <p>
                                 That's it! You've reached the beginning of this
-                                project :)
+                                repository :)
                             </p>
                         </styled.EndMessage>
                     }

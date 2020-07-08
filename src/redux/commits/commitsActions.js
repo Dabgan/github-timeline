@@ -90,6 +90,7 @@ const getNewCommits = (res) => {
     let resCommits = [];
     for (let i = 0; i < res.data.length; i++) {
         const date = new Date(res.data[i].commit.committer.date);
+        console.log(res.data[i].commit.committer.date);
         resCommits.push({
             message: res.data[i].commit.message,
             date: formatDate(date),
