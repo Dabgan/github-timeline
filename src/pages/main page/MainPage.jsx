@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+// redux
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setUsername, fetchRepos } from "../../redux";
+// components / styles
 import * as styled from "./mainPage.styles";
 import Button from "../../components/Button";
 

@@ -19,7 +19,7 @@ const device = {
 };
 
 const font = {
-    family: ["sans-serif", "Roboto"],
+    family: { main: "'Pangolin', cursive;" },
     color: { main: "#e0b019", secondary: `#f5f5f5`, black: "#000000" },
     weight: {
         regular: "400",

@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { Icon } from "@iconify/react";
+import InfiniteScroll from "react-infinite-scroll-component";
 
-export const Container = styled.div`
+export const Container = styled(InfiniteScroll)`
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-start;
     align-content: flex-start;
     width: 68rem;
-    height: 31.5rem;
     margin-top: ${(props) => props.theme.margin.s};
     overflow: auto;
 `;
