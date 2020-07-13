@@ -87,16 +87,16 @@ export const fetchCommitsNextPage = (commits, reposlink) => {
 
 // update list of commits
 const getNewCommits = (res) => {
-    let resCommits = [];
+    const commits = [];
     for (let i = 0; i < res.data.length; i++) {
         const date = new Date(res.data[i].commit.committer.date);
-        console.log(res.data[i].commit.committer.date);
-        resCommits.push({
+        commits.push({
             message: res.data[i].commit.message,
             date: formatDate(date),
+            id: res.data[i].node_id,
         });
     }
-    return resCommits;
+    return commits;
 };
 
 // if there is link to the next page, set new link and show button

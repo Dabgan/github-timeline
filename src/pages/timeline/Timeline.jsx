@@ -21,7 +21,7 @@ const Timeline = () => {
         <>
             {loading ? (
                 <MainContainer>
-                    <Loader loading={loading ? 1 : 0} size={8} />
+                    <Loader loading={loading ? 1 : 0} size={10} />
                 </MainContainer>
             ) : (
                 <InfiniteScroll
@@ -29,7 +29,7 @@ const Timeline = () => {
                     next={getNextPageOfCommits}
                     style={styled.InfinityLoaderStyles}
                     hasMore={nextPage}
-                    scrollThreshold={1}
+                    scrollThreshold={0.99}
                     loader={
                         <Loader loading={loadingNextPage ? 1 : 0} size={8} />
                     }
@@ -45,7 +45,7 @@ const Timeline = () => {
                     <styled.TimelineList>
                         <styled.Title>Commits timeline</styled.Title>
                         {data.map((commit) => (
-                            <TimeItem date={commit.date} key={commit.date}>
+                            <TimeItem date={commit.date} key={commit.id}>
                                 {commit.message}
                             </TimeItem>
                         ))}

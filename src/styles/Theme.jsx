@@ -31,6 +31,7 @@ const font = {
             xs: "1.9rem",
             s: "2.7rem",
             m: "3.6rem",
+            xl: "10rem",
         },
         body: {
             xs: "0.8rem",

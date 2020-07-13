@@ -65,7 +65,7 @@ export const fetchRepos = (username, history) => {
                 axios(reposUrl)
                     .then((res) => {
                         findNextReposLink(dispatch, res);
-                        dispatch(fetchReposSuccess(res.data));
+                        dispatch(fetchReposSuccess(getReposData(res)));
                     })
                     .catch((error) => dispatch(fetchReposFailure(error)));
             })
@@ -91,7 +91,7 @@ export const fetchReposNextPage = (link, data) => {
                     .then((res) => {
                         findNextReposLink(dispatch, res);
                         // update list of repositories
-                        const newRepos = [...data, ...res.data];
+                        const newRepos = [...data, ...getReposData(res)];
                         dispatch(fetchReposSuccess(newRepos));
                     })
                     .catch((error) => dispatch(fetchReposFailure(error)));
@@ -107,4 +107,18 @@ const findNextReposLink = (dispatch, res) => {
         return dispatch(setNextPageFlagRepos(isNextPage));
     }
     return;
+};
+
+// get all the data from API response, and then substract only the essential data
+const getReposData = (res) => {
+    const repos = [];
+    for (let i = 0; i < res.data.length; i++) {
+        repos.push({
+            name: res.data[i].name,
+            id: res.data[i].id,
+            description: res.data[i].description,
+            created_at: res.data[i].created_at,
+        });
+    }
+    return repos;
 };

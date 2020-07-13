@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Icon } from "@iconify/react";
 
 export const Container = styled.div`
     display: flex;
@@ -12,8 +13,7 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.h1`
-font-size: ${(props) => props.theme.font.size.header.s};
-    /* color: ${(props) => props.theme.font.color.main}; */
+    font-size: ${(props) => props.theme.font.size.header.s};
     span {
         color: ${(props) => props.theme.colors.coralBlue};
     }
@@ -43,18 +43,15 @@ export const RepoInfo = styled.div`
 `;
 
 export const RepoTitle = styled.div`
-    /* border: 2px solid #f11b1b; */
     display: flex;
     align-items: flex-start;
     word-break: break-word;
     font-size: ${(props) => props.theme.font.size.body.s};
-    /* padding: ${(props) => props.theme.padding.s}; */
     svg {
         flex: 0 0 20px;
         font-size: ${(props) => props.theme.font.size.body.m};
     }
     span {
-        /* border: 2px solid #069cc8; */
         align-self: center;
         margin-left: ${(props) => props.theme.margin.xs};
     }
@@ -65,4 +62,10 @@ export const RepoDesc = styled.p`
     font-size: ${(props) => props.theme.font.size.body.xs};
     color: ${(props) => props.theme.font.color.secondary};
     overflow: hidden;
+`;
+
+export const emptyRepos = styled(Icon)`
+    font-size: ${(props) => props.theme.font.size.header.xl};
+    margin-top: ${(props) => props.theme.margin.m};
+    color: ${(props) => props.theme.colors.coralBlue};
 `;
