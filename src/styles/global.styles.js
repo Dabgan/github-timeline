@@ -15,26 +15,14 @@ const GlobalStyle = createGlobalStyle`
 }
 body {
     font-size: 14px;
-    /* font-family: 'Balsamiq Sans', cursive; */
-    /* font-family: 'Concert One', cursive; */
-    /* font-family: 'Fontdiner Swanky', cursive; */
-    /* font-family: 'Gloria Hallelujah', cursive; */
-    /* font-family: 'Notable', sans-serif; */
-    /* font-family: 'Permanent Marker', cursive; */
-    font-family: 'Pangolin', cursive;
+    font-family: ${(props) => props.theme.font.family.main};
     letter-spacing: 0.14rem;
     color: ${(props) => props.theme.font.color.main};
     background: ${(props) => props.theme.colors.background};
  }
 
  button {
-    /* font-family: 'Balsamiq Sans', cursive; */
-    /* font-family: 'Concert One', cursive; */
-    /* font-family: 'Fontdiner Swanky', cursive; */
-    /* font-family: 'Gloria Hallelujah', cursive; */
-    /* font-family: 'Notable', sans-serif; */
-    /* font-family: 'Permanent Marker', cursive; */
-    font-family: 'Pangolin', cursive;
+    font-family: ${(props) => props.theme.font.family.main};
     letter-spacing: 0.0625em;
  }
     

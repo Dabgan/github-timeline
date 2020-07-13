@@ -1,11 +1,14 @@
 import React from "react";
+// redux
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCommitsNextPage } from "../../redux";
-import TimeItem from "./time item/TimeItem";
-import { MainContainer } from "../../styles/global.styles";
+// components
 import Loader from "../../components/Loader";
 import InfiniteScroll from "react-infinite-scroll-component";
+import TimeItem from "./time item/TimeItem";
+// styles
 import * as styled from "./timeline.styles";
+import { MainContainer } from "../../styles/global.styles";
 
 const Timeline = () => {
     const { data, nextPage, link, loading, loadingNextPage } = useSelector(
@@ -31,7 +34,7 @@ const Timeline = () => {
                     hasMore={nextPage}
                     scrollThreshold={0.99}
                     loader={
-                        <Loader loading={loadingNextPage ? 1 : 0} size={8} />
+                        <Loader loading={loadingNextPage ? 1 : 0} size={6} />
                     }
                     endMessage={
                         <styled.EndMessage>

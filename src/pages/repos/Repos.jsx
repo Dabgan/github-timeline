@@ -1,13 +1,13 @@
 import React from "react";
-import * as styled from "./repos.styles";
+// redux
 import { useSelector, useDispatch } from "react-redux";
-import { MainContainer, BtnContainer } from "../../styles/global.styles";
+import { MainContainer } from "../../styles/global.styles";
 import { fetchReposNextPage, fetchCommits } from "../../redux";
-import { Link } from "react-router-dom";
-import Button from "../../components/Button";
-import { Icon } from "@iconify/react";
-import repoIcon from "@iconify/icons-octicon/repo";
+// components
 import Loader from "../../components/Loader";
+import RepoTile from "./repo tile/RepoTile";
+// styles and icons
+import * as styled from "./repos.styles";
 import databaseError from "@iconify/icons-si-glyph/database-error";
 
 const Repos = () => {
@@ -18,6 +18,7 @@ const Repos = () => {
     );
     console.log("How many times it will be rendered?");
 
+    // function that sort repositories at start, based on a creation date (newest repos, at the top)
     const sortedRepos = data.sort((a, b) => {
         return new Date(b.created_at) - new Date(a.created_at);
     });
@@ -45,49 +46,27 @@ const Repos = () => {
                                 <span>{username}</span>.
                             </styled.Title>
                             <p>Click one to see commits timeline!</p>
-                            <styled.Container>
+                            <styled.Container // aka Infinity scroller (check in repos.styles.js)
+                                dataLength={data.length}
+                                next={getNextPageOfRepos}
+                                height={"31.5rem"}
+                                hasMore={nextPage}
+                                scrollThreshold={0.99}
+                                loader={
+                                    <Loader
+                                        loading={loadingNextPage ? 1 : 0}
+                                        size={6}
+                                    />
+                                }
+                            >
                                 {sortedRepos.map((repo) => (
-                                    <styled.Repo key={repo.id}>
-                                        <styled.RepoInfo
-                                            as={Link}
-                                            to="/timeline"
-                                            onClick={() =>
-                                                getCommits(repo.name)
-                                            }
-                                        >
-                                            <styled.RepoTitle>
-                                                <Icon icon={repoIcon} />
-                                                <span>{repo.name}</span>
-                                            </styled.RepoTitle>
-                                            <styled.RepoDesc>
-                                                {repo.description}
-                                            </styled.RepoDesc>
-                                        </styled.RepoInfo>
-                                    </styled.Repo>
+                                    <RepoTile
+                                        key={repo.id}
+                                        data={repo}
+                                        getCommits={getCommits}
+                                    />
                                 ))}
                             </styled.Container>
-                            <BtnContainer>
-                                {nextPage ? (
-                                    <>
-                                        {loadingNextPage ? (
-                                            <Loader
-                                                loading={
-                                                    loadingNextPage ? 1 : 0
-                                                }
-                                                size={3}
-                                            />
-                                        ) : (
-                                            <Button
-                                                onClick={getNextPageOfRepos}
-                                            >
-                                                Next Page
-                                            </Button>
-                                        )}
-                                    </>
-                                ) : (
-                                    <></>
-                                )}
-                            </BtnContainer>
                         </>
                     ) : (
                         // Empty repos information
