@@ -34,8 +34,19 @@ export const MainContainer = styled.div`
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    padding: ${(props) => props.theme.padding.xs};
+    @media ${(props) => props.theme.device.tablet} {
+        justify-content: ${(props) =>
+            props.loading ? "center" : "flex-start"};
+        padding: ${(props) => props.theme.padding.s};
+        padding-top: ${(props) => (props.loading ? "0" : props.theme.margin.l)};
+    }
     @media ${(props) => props.theme.device.phone} {
-        /* min-heigth: auto; */
+        padding-top: ${(props) => props.theme.padding.s};
+        justify-content: flex-start;
+        align-items: stretch;
+        text-align: center;
+        max-height: 100vh !important;
     }
 `;
 

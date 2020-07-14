@@ -3,6 +3,13 @@ import styled from "styled-components";
 export const Repo = styled.div`
     width: 33%;
     padding: ${(props) => props.theme.padding.xs};
+    @media ${(props) => props.theme.device.tablet} {
+        width: 50%;
+    }
+    @media ${(props) => props.theme.device.phone} {
+        width: 100%;
+        padding-right: ${(props) => props.theme.padding.s};
+    }
 `;
 
 export const RepoInfo = styled.div`
@@ -21,6 +28,10 @@ export const RepoInfo = styled.div`
             text-decoration: underline;
         }
     }
+    @media ${(props) => props.theme.device.phone} {
+        font-size: ${(props) => props.theme.font.size.body.xs};
+        height: 6rem;
+    }
 `;
 
 export const RepoTitle = styled.div`
@@ -36,10 +47,16 @@ export const RepoTitle = styled.div`
         align-self: center;
         margin-left: ${(props) => props.theme.margin.xs};
     }
+    @media ${(props) => props.theme.device.phone} {
+        text-align: left;
+    }
 `;
 export const RepoDesc = styled.p`
     margin-top: ${(props) => props.theme.margin.xs};
     font-size: ${(props) => props.theme.font.size.body.xs};
     color: ${(props) => props.theme.font.color.secondary};
     overflow: hidden;
+    @media ${(props) => props.theme.device.phone} {
+        text-align: left;
+    }
 `;

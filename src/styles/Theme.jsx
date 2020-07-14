@@ -6,12 +6,14 @@ const breakpoints = {
     desktop: `1150px`,
     tablet: `1024px`,
     phone: `420px`,
+    smallPhone: `330px`,
 };
 const device = {
     bigDesktop: `only screen and (max-width: ${breakpoints.bigDesktop})`,
     desktop: `only screen and (max-width: ${breakpoints.desktop})`,
     tablet: `only screen and (max-width: ${breakpoints.tablet})`,
     phone: `only screen and (max-width: ${breakpoints.phone})`,
+    smallPhone: `only screen and (max-width: ${breakpoints.smallPhone})`,
 };
 
 const font = {
