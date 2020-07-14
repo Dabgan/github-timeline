@@ -2,20 +2,16 @@ import React from "react";
 import { ThemeProvider } from "styled-components";
 
 const breakpoints = {
-    bigDesktop: 1440,
-    desktop: 1150,
-    bigTablet: 1020,
-    tablet: 767,
-    phone: 374,
-    smallPhone: 340,
+    bigDesktop: `1440px`,
+    desktop: `1150px`,
+    tablet: `1024px`,
+    phone: `420px`,
 };
 const device = {
-    bigDesktop: `(min-width: ${breakpoints.bigDesktop})`,
-    desktop: `(min-width: ${breakpoints.desktop})`,
-    bigTablet: `(min-width: ${breakpoints.bigTablet})`,
-    tablet: `(min-width: ${breakpoints.tablet})`,
-    phone: `(min-width: ${breakpoints.phone})`,
-    smallPhone: `(min-width: ${breakpoints.smallPhone})`,
+    bigDesktop: `only screen and (max-width: ${breakpoints.bigDesktop})`,
+    desktop: `only screen and (max-width: ${breakpoints.desktop})`,
+    tablet: `only screen and (max-width: ${breakpoints.tablet})`,
+    phone: `only screen and (max-width: ${breakpoints.phone})`,
 };
 
 const font = {
@@ -45,7 +41,6 @@ const font = {
 const colors = {
     main: "#FCC926",
     secondary: "#0dbf99",
-    ternary: "#EF26FC",
     background: "#141416",
     powderWhite: "#FFFDF9",
     persianGreen: "#06B49A",

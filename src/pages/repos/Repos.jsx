@@ -16,7 +16,6 @@ const Repos = () => {
     const { data, nextPage, link, loading, loadingNextPage } = useSelector(
         (state) => state.repos
     );
-    console.log("How many times it will be rendered?");
 
     // function that sort repositories at start, based on a creation date (newest repos, at the top)
     const sortedRepos = data.sort((a, b) => {

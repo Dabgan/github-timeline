@@ -34,6 +34,9 @@ export const MainContainer = styled.div`
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    @media ${(props) => props.theme.device.phone} {
+        /* min-heigth: auto; */
+    }
 `;
 
 export const BtnContainer = styled.div`
@@ -41,7 +44,7 @@ export const BtnContainer = styled.div`
     flex-flow: row;
     justify-content: space-around;
     padding: 1.5rem;
-    @media (min-width: 320px) and (max-width: 1181px) {
+    @media ${(props) => props.theme.device.smallPhone} {
         margin: 1rem 0;
         width: 100%;
         justify-content: space-between;
