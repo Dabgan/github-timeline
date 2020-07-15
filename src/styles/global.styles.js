@@ -2,7 +2,6 @@ import { createGlobalStyle } from "styled-components";
 import styled from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -20,12 +19,10 @@ body {
     color: ${(props) => props.theme.font.color.main};
     background: ${(props) => props.theme.colors.background};
  }
-
  button {
     font-family: ${(props) => props.theme.font.family.main};
     letter-spacing: 0.0625em;
  }
-    
 `;
 
 export const MainContainer = styled.div`
@@ -39,12 +36,11 @@ export const MainContainer = styled.div`
         justify-content: ${(props) =>
             props.loading ? "center" : "flex-start"};
         padding: ${(props) => props.theme.padding.s};
-        padding-top: ${(props) => (props.loading ? "0" : props.theme.margin.l)};
+        padding-top: ${(props) => (props.loading ? "0" : props.theme.margin.s)};
     }
     @media ${(props) => props.theme.device.phone} {
         padding-top: ${(props) => props.theme.padding.s};
-        justify-content: flex-start;
-        align-items: stretch;
+        align-items: center;
         text-align: center;
         max-height: 100vh !important;
     }
