@@ -8,32 +8,7 @@ import {
 } from "./reposType";
 
 const initialState = {
-    data: [
-        {
-            name: "scoop-bucket",
-            id: 2623630138,
-            description: null,
-            created_at: "2020-05-08T15:42:43Z",
-        },
-        {
-            name: "scoop-bucket",
-            id: 2623623038,
-            description: null,
-            created_at: "2020-05-08T15:42:43Z",
-        },
-        {
-            name: "scoop-bucket",
-            id: 2623563038,
-            description: null,
-            created_at: "2020-05-08T15:42:43Z",
-        },
-        {
-            name: "scoop-bucket",
-            id: 2623630138,
-            description: null,
-            created_at: "2020-05-08T15:42:43Z",
-        },
-    ],
+    data: [],
     nextPage: false,
     loadingNextPage: false,
     link: "",

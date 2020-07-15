@@ -23,14 +23,13 @@ const Timeline = () => {
     return (
         <>
             {loading ? (
-                <MainContainer>
+                <MainContainer loading={loading ? 1 : 0}>
                     <Loader loading={loading ? 1 : 0} size={10} />
                 </MainContainer>
             ) : (
                 <InfiniteScroll
                     dataLength={data.length}
                     next={getNextPageOfCommits}
-                    style={styled.InfinityLoaderStyles}
                     hasMore={nextPage}
                     scrollThreshold={0.99}
                     loader={

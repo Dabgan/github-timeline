@@ -31,7 +31,7 @@ const Repos = () => {
     };
 
     return (
-        <MainContainer loading={loading}>
+        <MainContainer loading={loading ? 1 : 0}>
             {/* Show loader when data loads, when it's finish, show repos or empty panel */}
             {loading ? (
                 <Loader loading={loading ? 1 : 0} size={10} />

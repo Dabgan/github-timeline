@@ -12,7 +12,7 @@ export const Container = styled(InfiniteScroll)`
     overflow: auto;
     @media ${(props) => props.theme.device.tablet} {
         width: 100%;
-        height: 43rem !important;
+        height: 49rem !important;
     }
     @media ${(props) => props.theme.device.phone} {
         flex-flow: column no-wrap;
