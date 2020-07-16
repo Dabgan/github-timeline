@@ -10,7 +10,7 @@ import Button from "../../components/Button";
 const MainPage = () => {
     const history = useHistory();
     const { error } = useSelector((state) => state.repos);
-    const [name, setName] = useState("gabriel");
+    const [name, setName] = useState("");
     const dispatch = useDispatch();
 
     const handleSubmit = (e) => {
