@@ -9,6 +9,12 @@ import {
     SET_REPOSITORY_LINK,
 } from "./reposType";
 
+const fetchNextPage = () => {
+    return {
+        type: FETCH_NEXT_PAGE,
+    };
+};
+
 export const fetchReposRequest = () => {
     return {
         type: FETCH_REPOS_REQUEST,
@@ -24,12 +30,6 @@ export const fetchReposFailure = (error) => {
     return {
         type: FETCH_REPOS_FAILURE,
         payload: error,
-    };
-};
-
-export const fetchNextPage = () => {
-    return {
-        type: FETCH_NEXT_PAGE,
     };
 };
 
