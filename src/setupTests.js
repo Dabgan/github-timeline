@@ -4,8 +4,7 @@
 // learn more: https://github.com/testing-library/jest-dom
 import React from "react";
 import "@testing-library/jest-dom/extend-expect";
-import Enzyme from "enzyme";
-import { shallow, mount, render } from "enzyme";
+import Enzyme, { shallow, mount, render } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
 React.useLayoutEffect = React.useEffect;
