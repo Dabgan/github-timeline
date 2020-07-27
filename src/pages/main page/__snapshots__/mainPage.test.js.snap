@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render <Main Page/> Renders whole page without crashing 1`] = `ReactWrapper {}`;
+
+exports[`Render <Main Page/> Renders without crashing 1`] = `ReactWrapper {}`;
+
+exports[`Render <Main Page/> and all its children Renders whole page without crashing 1`] = `ReactWrapper {}`;
+
+exports[`Render main page Renders without crashing 1`] = `ReactWrapper {}`;
