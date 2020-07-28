@@ -12,12 +12,14 @@ In this project I used:
 -   [React](https://pl.reactjs.org/), React Hooks
 -   [Styled-Components](https://styled-components.com/) 
 -   [Redux](https://redux.js.org/) react-redux, redux-thunk and redux-devtools-extension
+-   Jest + Enzyme for some basic testing
 
 ## What did I learn?
 
 -   what redux is and what it's used for
 -   when you should use it, and when it is better to stick to React Context API
 -   more advanced stuff from styledComponents like Theme'ing and using createGlobalStyle
+-   basic testing, what tests are, why you should test and what you should test
 
 ## Instalation
 
