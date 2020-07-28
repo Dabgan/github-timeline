@@ -75,7 +75,7 @@ describe("Render <Main Page/> and all its children", () => {
     });
 });
 
-describe("Input tests", () => {
+describe("Form, input and button tests", () => {
     let store, wrapper;
 
     beforeAll(() => {
@@ -130,19 +130,39 @@ describe("Input tests", () => {
         );
     });
 
-    // test("Button submits form after click", () => {
-    //     const onSubmitFn = jest.fn();
-    //     // const button = wrapper.find(Button);
-    //     const formWrapper = global.shallow(
-    //         <Theme>
-    //             <Container onChange={onSubmitFn} />
-    //         </Theme>
-    //     );
-    //     console.log(formWrapper.debug());
-    //     const form = formWrapper.find(Container);
-    //     console.log(form.debug());
-    //     // button.simulate("click");
-    //     form.simulate("submit");
-    //     expect(onSubmitFn).toHaveBeenCalledTimes(1);
-    // });
+    test("Button should emit callback on click event", () => {
+        const mockFn = jest.fn();
+        const myBtn = global.shallow(
+            <Theme>
+                <Button onClick={mockFn} />
+            </Theme>
+        );
+        myBtn.children().simulate("click");
+        const callback = mockFn.mock.calls.length;
+        expect(callback).toBe(1);
+    });
+
+    test("Form should emit callback after submit event", () => {
+        const mockFn = jest.fn();
+        const form = global.shallow(
+            <Theme>
+                <Container onSubmit={mockFn} />
+            </Theme>
+        );
+        form.children().simulate("submit");
+        const callback = mockFn.mock.calls.length;
+        expect(callback).toBe(1);
+    });
+
+    test("Form trigger onSubmit", () => {
+        const mockFn = jest.fn();
+        const form = global.shallow(
+            <Theme>
+                <Container onSubmit={mockFn} />
+            </Theme>
+        );
+        expect(form.children().prop("onSubmit")).toBeTruthy();
+        // const callback = mockFn.mock.calls.length;
+        // expect(callback).toBe(1);
+    });
 });
