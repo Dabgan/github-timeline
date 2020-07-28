@@ -7,7 +7,7 @@ import {
     SET_REPOSITORY_LINK,
 } from "./reposType";
 
-const initialState = {
+export const initialState = {
     data: [],
     nextPage: false,
     loadingNextPage: false,
