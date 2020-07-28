@@ -1,47 +1,40 @@
 import axios from "axios";
 import parse from "parse-link-header";
-import {
-    FETCH_REPOS_REQUEST,
-    FETCH_REPOS_SUCCESS,
-    FETCH_REPOS_FAILURE,
-    FETCH_NEXT_PAGE,
-    SET_NEXT_PAGE_FLAG_REPOS,
-    SET_REPOSITORY_LINK,
-} from "./reposType";
+import * as types from "./reposType";
 
 const fetchNextPage = () => {
     return {
-        type: FETCH_NEXT_PAGE,
+        type: types.FETCH_NEXT_PAGE,
     };
 };
 
 export const fetchReposRequest = () => {
     return {
-        type: FETCH_REPOS_REQUEST,
+        type: types.FETCH_REPOS_REQUEST,
     };
 };
 export const fetchReposSuccess = (repos) => {
     return {
-        type: FETCH_REPOS_SUCCESS,
+        type: types.FETCH_REPOS_SUCCESS,
         payload: repos,
     };
 };
 export const fetchReposFailure = (error) => {
     return {
-        type: FETCH_REPOS_FAILURE,
+        type: types.FETCH_REPOS_FAILURE,
         payload: error,
     };
 };
 
 export const setNextPageFlagRepos = (boolean) => {
     return {
-        type: SET_NEXT_PAGE_FLAG_REPOS,
+        type: types.SET_NEXT_PAGE_FLAG_REPOS,
         payload: boolean,
     };
 };
 export const setRepoLink = (link) => {
     return {
-        type: SET_REPOSITORY_LINK,
+        type: types.SET_REPOSITORY_LINK,
         payload: link,
     };
 };
@@ -65,7 +58,7 @@ export const fetchRepos = (username, history) => {
                 axios(reposUrl)
                     .then((res) => {
                         findNextReposLink(dispatch, res);
-                        dispatch(fetchReposSuccess(getReposData(res)));
+                        dispatch(fetchReposSuccess(getReposData(res.data)));
                     })
                     .catch((error) => dispatch(fetchReposFailure(error)));
             })
@@ -91,7 +84,7 @@ export const fetchReposNextPage = (link, data) => {
                     .then((res) => {
                         findNextReposLink(dispatch, res);
                         // update list of repositories
-                        const newRepos = [...data, ...getReposData(res)];
+                        const newRepos = [...data, ...getReposData(res.data)];
                         dispatch(fetchReposSuccess(newRepos));
                     })
                     .catch((error) => dispatch(fetchReposFailure(error)));
@@ -110,14 +103,14 @@ const findNextReposLink = (dispatch, res) => {
 };
 
 // get all the data from API response, and then substract only the essential data
-const getReposData = (res) => {
+export const getReposData = (res) => {
     const repos = [];
-    for (let i = 0; i < res.data.length; i++) {
+    for (let i = 0; i < res.length; i++) {
         repos.push({
-            name: res.data[i].name,
-            id: res.data[i].id,
-            description: res.data[i].description,
-            created_at: res.data[i].created_at,
+            name: res[i].name,
+            id: res[i].id,
+            description: res[i].description,
+            created_at: res[i].created_at,
         });
     }
     return repos;
