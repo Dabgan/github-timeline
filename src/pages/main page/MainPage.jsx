@@ -21,8 +21,7 @@ const MainPage = () => {
         e.preventDefault();
         // stopPropagation prevents errors when clicking enter on input with LastPass extension installed
         e.stopPropagation();
-        if (name === "") dispatchUser("dabgan");
-        else dispatchUser(name);
+        name === "" ? dispatchUser("dabgan") : dispatchUser(name);
     };
 
     return (

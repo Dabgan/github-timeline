@@ -59,7 +59,7 @@ export const Input = styled.input`
     border-radius: ${(props) => props.theme.borderRadius};
     outline: none;
     ::placeholder {
-        color: inherit;
+        color: #606060;
     }
 `;
 

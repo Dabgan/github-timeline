@@ -9,12 +9,11 @@ import RepoTile from "./repo tile/RepoTile";
 // styles and icons
 import * as styled from "./repos.styles";
 import databaseError from "@iconify/icons-si-glyph/database-error";
-
 import { Icon } from "@iconify/react";
 
 const Repos = () => {
-    const username = useSelector((state) => state.username.username);
     const dispatch = useDispatch();
+    const username = useSelector((state) => state.username.username);
     const { data, nextPage, link, loading, loadingNextPage } = useSelector(
         (state) => state.repos
     );
