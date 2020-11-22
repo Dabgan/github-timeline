@@ -1,7 +1,7 @@
 import { SET_USER } from "./usernameType";
 
 const initialState = {
-    username: "zasraniec",
+    username: "",
 };
 
 const commitsReducer = (state = initialState, action) => {

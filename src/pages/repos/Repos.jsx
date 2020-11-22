@@ -10,6 +10,8 @@ import RepoTile from "./repo tile/RepoTile";
 import * as styled from "./repos.styles";
 import databaseError from "@iconify/icons-si-glyph/database-error";
 
+import { Icon } from "@iconify/react";
+
 const Repos = () => {
     const username = useSelector((state) => state.username.username);
     const dispatch = useDispatch();
@@ -71,11 +73,16 @@ const Repos = () => {
                         // Empty repos information
                         <>
                             <styled.Title>
-                                It looks like <span>{username}</span> doesn't
-                                have any repositories.
+                                It looks like{" "}
+                                <span>{username ? username : "this user"}</span>{" "}
+                                doesn't have any repositories.
                             </styled.Title>
-                            Maybe try other users?
-                            <styled.emptyRepos icon={databaseError} />
+                            <styled.SubTitle>
+                                Maybe try other users?
+                            </styled.SubTitle>
+                            <styled.emptyRepos to="/">
+                                <Icon icon={databaseError} />
+                            </styled.emptyRepos>
                         </>
                     )}
                 </>

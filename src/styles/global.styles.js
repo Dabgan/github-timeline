@@ -12,13 +12,30 @@ const GlobalStyle = createGlobalStyle`
 *::after {
     box-sizing: border-box;
 }
+html {
+    scrollbar-color: ${({ theme }) => theme.colors.coralBlue}
+        ${({ theme }) => theme.colors.grey};
+}
 body {
     font-size: 14px;
     font-family: ${(props) => props.theme.font.family.main};
     letter-spacing: 0.14rem;
     color: ${(props) => props.theme.font.color.main};
     background: ${(props) => props.theme.colors.background};
+
+    ::-webkit-scrollbar {
+        width: 16px;
+    }
+    ::-webkit-scrollbar-track {
+        background: ${({ theme }) => theme.colors.grey};
+    }
+    ::-webkit-scrollbar-thumb {
+        background-color: ${({ theme }) => theme.colors.coralBlue};
+        border: 1px solid ${({ theme }) => theme.main};
+    }
+
  }
+
  button {
     font-family: ${(props) => props.theme.font.family.main};
     letter-spacing: 0.0625em;
@@ -59,3 +76,18 @@ export const BtnContainer = styled.div`
 `;
 
 export default GlobalStyle;
+
+// html {
+//     font-size: 62.5%;
+//
+// }
+// body {
+//     background-color: ${({ theme }) => theme.background};
+//     font-family: ${({ theme }) => theme.fonts.family.main};
+//     padding-top: 2rem;
+
+//     ${({ theme }) => theme.mq.lg} {
+//         padding-top: 5rem;
+//     }
+
+// }

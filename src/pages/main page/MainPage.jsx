@@ -13,12 +13,16 @@ const MainPage = () => {
     const [name, setName] = useState("");
     const dispatch = useDispatch();
 
+    const dispatchUser = (user) => {
+        dispatch(setUsername(user));
+        dispatch(fetchRepos(user, history));
+    };
     const handleSubmit = (e) => {
         e.preventDefault();
         // stopPropagation prevents errors when clicking enter on input with LastPass extension installed
         e.stopPropagation();
-        dispatch(setUsername(name));
-        dispatch(fetchRepos(name, history));
+        if (name === "") dispatchUser("dabgan");
+        else dispatchUser(name);
     };
 
     return (
@@ -29,19 +33,19 @@ const MainPage = () => {
                     Enter github username:
                 </styled.Label>
                 <styled.Input
-                    required
                     id="username"
                     name="username"
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
+                    placeholder="dabgan"
                 />
                 {error ? (
                     <styled.ErrorMsg>
                         User not found. Please try different one.
                     </styled.ErrorMsg>
                 ) : null}
-                <Button submit>Show commits</Button>
+                <Button submit>Show repos</Button>
             </styled.Container>
         </styled.MainContainer>
     );
