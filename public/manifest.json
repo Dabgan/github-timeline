@@ -1,6 +1,7 @@
 {
-    "short_name": "React App",
-    "name": "Create React App Sample",
+    "short_name": "Timeline",
+    "name": "Github commits timeline",
+    "description": "After entering a github login, application will download repositories of that user. Then choose a repository and click on it to see commits history presented on a timeline.",
     "icons": [
         {
             "src": "favicon.ico",
