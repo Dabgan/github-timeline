@@ -58,6 +58,9 @@ export const Input = styled.input`
     font-size: ${(props) => props.theme.font.size.body.m};
     border-radius: ${(props) => props.theme.borderRadius};
     outline: none;
+    ::placeholder {
+        color: #606060;
+    }
 `;
 
 export const ErrorMsg = styled.div`
